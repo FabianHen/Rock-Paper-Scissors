@@ -11,11 +11,11 @@ public class ObjectScript : MonoBehaviour
 {
     public Type type;
     private Type targetType;
-    private List<ObjectScript> objects;
+    [SerializeField] private List<ObjectScript> collidingObjects;
     public Sprite rockSprite, paperSprite, scissorsSprite;
     void Start()
     {
-        objects = new List<ObjectScript>();
+        collidingObjects = new List<ObjectScript>();
         ManagerScript.Instance.Objects.Add(this);
         targetType = SetTargetType(type);
     }
@@ -29,23 +29,27 @@ public class ObjectScript : MonoBehaviour
     void Update()
     {
         CheckCollidingObjects();
-        Vector3 nearestTargetType = SearchNearestTargetType().transform.position;
-        Vector3 targetPosition = Vector3.ClampMagnitude(nearestTargetType - transform.position, 0.1f);
-        targetPosition.z = 0;
-        transform.position += targetPosition * 0.1f;
+        if (SearchNearestTargetType() != null) {
+            Vector3 nearestTargetType = SearchNearestTargetType().transform.position;
+            Vector3 targetPosition = Vector3.ClampMagnitude(nearestTargetType - transform.position, 0.1f);
+            targetPosition.z = 0;
+            transform.position += targetPosition * 0.1f;
+        }
     }
 
     private void CheckCollidingObjects() {
-        foreach(ObjectScript obj in objects) { 
-            if(obj.type == targetType) {
-                obj.ChangeType(type);
+        if (collidingObjects != null) {
+            foreach (ObjectScript obj in collidingObjects) {
+                if (obj.type == targetType) {
+                    obj.ChangeType(type);
+                }
             }
         }
     }
 
     private ObjectScript SearchNearestTargetType() {
         float distance = 50000.0f;
-        ObjectScript nearestObject = this;
+        ObjectScript nearestObject = null;
         foreach (var obj in ManagerScript.Instance.Objects) { 
             if (obj.type == targetType) {
                 float distanceNew = Vector3.Distance(this.transform.position , obj.transform.position);
@@ -71,11 +75,13 @@ public class ObjectScript : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        var collisionObject = other.GetComponent<ObjectScript>();
-        objects.Add(collisionObject);
+        if (other.GetComponent<ObjectScript>() != null) {
+            var collisionObject = other.GetComponent<ObjectScript>();
+            collidingObjects.Add(collisionObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        objects.Remove(other.GetComponent<ObjectScript>());
+        collidingObjects.Remove(other.GetComponent<ObjectScript>());
     }
 }

@@ -1,6 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ManagerScript : MonoBehaviour
@@ -18,11 +18,33 @@ public class ManagerScript : MonoBehaviour
     #endregion
 
     public List<ObjectScript> Objects = new();
+    private Type currentType;
+    private Boolean objectsPlaceable = true;
+    public GameObject rock, paper, scissors; 
 
-    void Update() {
-        CheckMousePosition();
-        UpdateMouseIcon();
-
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
+            Instantiate(GetCurrentObject(),new Vector3(Input.mousePosition.x, Input.mousePosition.y,-2),new Quaternion(0,0,0,0));
+        }
     }
+
+    private GameObject GetCurrentObject() {
+        if (currentType == Type.Rock) { return rock; }
+        else if (currentType == Type.Paper) { return paper; }
+        else { return scissors; }
+    }
+
+    public void ClearObjects() {
+        foreach (ObjectScript obj in Objects) {
+            Destroy(obj.GameObject());
+        }
+        Objects = new List<ObjectScript> ();
+    }
+
+    public void SetObjectsPlaceable(Boolean pObjectsPlaceable) { objectsPlaceable = pObjectsPlaceable; }
+    public void SetCurrentType(Type type) { currentType = type;}
+
+    public Boolean GetObjectsPlaceable() { return objectsPlaceable; }
+    public Type GetCurrentType() { return currentType;}
 }
  
