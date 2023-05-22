@@ -28,11 +28,6 @@ public class ManagerScript : MonoBehaviour
     public GameObject rock, paper, scissors;
     public GameStatus status;
     public float normalSpeed, fastForwardSpeed;
-
-    private void Start() {
-        normalSpeed = 1.0f;
-        fastForwardSpeed = 5.0f;
-    }
     private void Update() {
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
@@ -55,7 +50,15 @@ public class ManagerScript : MonoBehaviour
         }
         Objects = new List<ObjectScript> ();
     }
-
+    public Boolean OneLeft() {
+        Type winnerType = Objects[0].type;
+        foreach(ObjectScript obj in Objects) {
+            if(obj.type != winnerType) { 
+                return false;
+            }
+        }
+        return true;
+    }
     public void SetObjectsPlaceable(Boolean pObjectsPlaceable) { objectsPlaceable = pObjectsPlaceable; }
     public void SetCurrentType(Type type) { currentType = type;}
 
