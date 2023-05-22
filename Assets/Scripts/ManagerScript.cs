@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+public enum GameStatus
+{
+    Paused,
+    Running,
+    FastForward
+}
 public class ManagerScript : MonoBehaviour
 {
     #region Singleton
@@ -20,11 +25,21 @@ public class ManagerScript : MonoBehaviour
     public List<ObjectScript> Objects = new();
     private Type currentType;
     private Boolean objectsPlaceable = true;
-    public GameObject rock, paper, scissors; 
+    public GameObject rock, paper, scissors;
+    public GameStatus status;
+    public float normalSpeed, fastForwardSpeed;
 
+    private void Start() {
+        normalSpeed = 1.0f;
+        fastForwardSpeed = 5.0f;
+    }
     private void Update() {
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
-            Instantiate(GetCurrentObject(),new Vector3(Input.mousePosition.x, Input.mousePosition.y,-2),new Quaternion(0,0,0,0));
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 1000.0f;       
+            Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
+            Instantiate(GetCurrentObject(), objectPos, Quaternion.identity); ;
         }
     }
 

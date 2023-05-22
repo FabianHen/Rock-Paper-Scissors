@@ -29,11 +29,16 @@ public class ObjectScript : MonoBehaviour
     void Update()
     {
         CheckCollidingObjects();
-        if (SearchNearestTargetType() != null) {
+        if (SearchNearestTargetType() != null && ManagerScript.Instance.status != GameStatus.Paused) {
             Vector3 nearestTargetType = SearchNearestTargetType().transform.position;
             Vector3 targetPosition = Vector3.ClampMagnitude(nearestTargetType - transform.position, 0.1f);
             targetPosition.z = 0;
-            transform.position += targetPosition * 0.1f;
+            if (ManagerScript.Instance.status == GameStatus.Running) {
+                transform.position += targetPosition * ManagerScript.Instance.normalSpeed;
+            }
+            else {
+                transform.position += targetPosition * ManagerScript.Instance.fastForwardSpeed;
+            }
         }
     }
 
