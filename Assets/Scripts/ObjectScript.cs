@@ -13,8 +13,10 @@ public class ObjectScript : MonoBehaviour
     private Type targetType;
     [SerializeField] private List<ObjectScript> collidingObjects;
     public Sprite rockSprite, paperSprite, scissorsSprite;
+    private float cooldown;
     void Start()
     {
+        cooldown = Time.time + 1;
         collidingObjects = new List<ObjectScript>();
         ManagerScript.Instance.Objects.Add(this);
         targetType = SetTargetType(type);
@@ -28,7 +30,9 @@ public class ObjectScript : MonoBehaviour
 
     void Update()
     {
-        CheckCollidingObjects();
+        if (Time.time > cooldown) {
+            CheckCollidingObjects();
+        }
         if (SearchNearestTargetType() != null && ManagerScript.Instance.status != GameStatus.Paused) {
             Vector3 nearestTargetType = SearchNearestTargetType().transform.position;
             Vector3 targetPosition = Vector3.ClampMagnitude(nearestTargetType - transform.position, 0.1f);
@@ -77,6 +81,7 @@ public class ObjectScript : MonoBehaviour
         type = pType;
         targetType = SetTargetType(type);
         UpdateSprite();
+        cooldown = Time.time + 1;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
