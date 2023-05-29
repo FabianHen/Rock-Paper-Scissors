@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu, optionsMenu;
+
+    private void Start() {
+        
+    }
     public void PlayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

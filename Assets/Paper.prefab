@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7511628401912766482}
   - component: {fileID: 3981609261087345661}
   - component: {fileID: -7097176423574822942}
+  - component: {fileID: 2190395247445109659}
   m_Layer: 6
   m_Name: Paper
   m_TagString: Untagged
@@ -38,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: 0.0000076294}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 8, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1785648735041201061
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  collidingObjects: []
   rockSprite: {fileID: 21300000, guid: e8365989a2dfee94b89ff91b221b6443, type: 3}
   paperSprite: {fileID: 21300000, guid: 1fb37bf9c038ad14cbc98d1dc855ae51, type: 3}
   scissorsSprite: {fileID: 21300000, guid: 1e9cd78c4acbf3d4ca0e1acfdaa23e16, type: 3}
@@ -154,3 +156,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &2190395247445109659
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45733425814321460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 89fab82924572ab438c3d1c81f8468b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

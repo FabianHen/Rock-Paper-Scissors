@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public enum GameStatus
 {
     Paused,
@@ -24,10 +26,21 @@ public class ManagerScript : MonoBehaviour
 
     public List<ObjectScript> Objects = new();
     private Type currentType;
-    private Boolean objectsPlaceable = true;
+    private bool objectsPlaceable = true;
     public GameObject rock, paper, scissors;
     public GameStatus status;
     public float normalSpeed, fastForwardSpeed;
+    public bool destroyOnHit;
+    private void Start() {
+        if(SceneManager.GetActiveScene().buildIndex == 0) {
+            objectsPlaceable = false;
+        }
+        else {
+            objectsPlaceable = true;
+        }
+
+        destroyOnHit = true;
+    }
     private void Update() {
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
@@ -50,7 +63,7 @@ public class ManagerScript : MonoBehaviour
         }
         Objects = new List<ObjectScript> ();
     }
-    public Boolean OneLeft() {
+    public bool OneLeft() {
         Type winnerType = Objects[0].type;
         foreach(ObjectScript obj in Objects) {
             if(obj.type != winnerType) { 

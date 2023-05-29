@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8727958744319033540}
   - component: {fileID: 8789251935102198525}
   - component: {fileID: 2876961689573456784}
+  - component: {fileID: 3343413798855524568}
   m_Layer: 6
   m_Name: Scissors
   m_TagString: Untagged
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  collidingObjects: []
   rockSprite: {fileID: 21300000, guid: e8365989a2dfee94b89ff91b221b6443, type: 3}
   paperSprite: {fileID: 21300000, guid: 1fb37bf9c038ad14cbc98d1dc855ae51, type: 3}
   scissorsSprite: {fileID: 21300000, guid: 1e9cd78c4acbf3d4ca0e1acfdaa23e16, type: 3}
@@ -154,3 +156,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &3343413798855524568
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056378033638813093}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5899210211d402f49a281d00e39da8d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

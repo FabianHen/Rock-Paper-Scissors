@@ -5,7 +5,7 @@ public class SpawnRandomObjects : MonoBehaviour
     [SerializeField] GameObject rock, paper, scissors;
     private GameObject[] objects;
     private float cooldown;
-    private int objectCount;
+    private int objectSpawnNumber;
     [SerializeField] float spawnBuffer;
     void Start()
     {
@@ -20,23 +20,19 @@ public class SpawnRandomObjects : MonoBehaviour
 
         cooldown = Time.time + spawnBuffer;
 
-        objectCount = 0;
+        objectSpawnNumber = 0;
 
     }
     void Update()
     {
-        if( Time.time > cooldown && ManagerScript.Instance.Objects.Count < 10) {
-            SpawnObject(objectCount);
+        if(Time.time > cooldown) {
+            SpawnObject(objectSpawnNumber);
             cooldown = Time.time + spawnBuffer;
-            objectCount++;
-            if(objectCount > 2) {
-                objectCount = 0;
+            objectSpawnNumber++;
+            if(objectSpawnNumber > 2) {
+                objectSpawnNumber = 0;
             }
-
         }   
-        else if(ManagerScript.Instance.Objects.Count >= 10 && ManagerScript.Instance.OneLeft()) {
-            ManagerScript.Instance.ClearObjects();
-        }
     }
 
     private void SpawnObject(int index) {

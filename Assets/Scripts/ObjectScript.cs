@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum Type
@@ -21,13 +22,6 @@ public class ObjectScript : MonoBehaviour
         ManagerScript.Instance.Objects.Add(this);
         targetType = SetTargetType(type);
     }
-
-    private void UpdateSprite() {
-        if(type == Type.Rock) { this.GetComponent<SpriteRenderer>().sprite = rockSprite; }
-        else if (type == Type.Paper) { this.GetComponent<SpriteRenderer>().sprite = paperSprite; }
-        else if (type == Type.Scissors) { this.GetComponent<SpriteRenderer>().sprite = scissorsSprite; }
-    }
-
     void Update()
     {
         if (Time.time > cooldown) {
@@ -46,11 +40,17 @@ public class ObjectScript : MonoBehaviour
         }
     }
 
+    private void UpdateSprite() {
+        if (type == Type.Rock) { this.GetComponent<SpriteRenderer>().sprite = rockSprite; }
+        else if (type == Type.Paper) { this.GetComponent<SpriteRenderer>().sprite = paperSprite; }
+        else if (type == Type.Scissors) { this.GetComponent<SpriteRenderer>().sprite = scissorsSprite; }
+    }
+
     private void CheckCollidingObjects() {
         if (collidingObjects != null) {
-            foreach (ObjectScript obj in collidingObjects) {
-                if (obj.type == targetType) {
-                    obj.ChangeType(type);
+           for(int i = 0; i < collidingObjects.Count; i++) {
+                if (collidingObjects[i].type == targetType) {
+                    collidingObjects[i].Hit(type);
                 }
             }
         }
@@ -77,11 +77,17 @@ public class ObjectScript : MonoBehaviour
         return Type.Scissors;
     }
 
-    public void ChangeType(Type pType) {
-        type = pType;
-        targetType = SetTargetType(type);
-        UpdateSprite();
-        cooldown = Time.time + 1;
+    public void Hit(Type pType) {
+        if (!ManagerScript.Instance.destroyOnHit) {
+            type = pType;
+            targetType = SetTargetType(type);
+            UpdateSprite();
+            cooldown = Time.time + 1;
+        }
+        else {
+            ManagerScript.Instance.Objects.Remove(this);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
