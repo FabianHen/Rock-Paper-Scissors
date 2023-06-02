@@ -18,8 +18,7 @@ public class ArrowScript : MonoBehaviour
             gameObject.GetComponent<Image>().sprite = pointIn;
             anim.SetTrigger("Push");
             isPointingOut = false;
-        }
-        else {
+        } else {
             gameObject.GetComponent<Image>().sprite = pointOut;
             anim.SetTrigger("Pull");
             isPointingOut = true;   

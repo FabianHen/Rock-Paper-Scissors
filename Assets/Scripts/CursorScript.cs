@@ -15,8 +15,9 @@ public class CursorScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         ManagerScript.Instance.SetObjectsPlaceable(false);
     }
     public void OnPointerExit(PointerEventData eventData) {
-        Cursor.SetCursor(outsideCursor, new Vector2(10, 0), CursorMode.Auto);
-        ManagerScript.Instance.SetObjectsPlaceable(true);
+        if (ManagerScript.Instance.status == GameStatus.Paused) {
+            Cursor.SetCursor(outsideCursor, new Vector2(10, 0), CursorMode.Auto);
+            ManagerScript.Instance.SetObjectsPlaceable(true);
+        }
     }
-
 }

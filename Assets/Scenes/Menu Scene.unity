@@ -1357,7 +1357,7 @@ MonoBehaviour:
   rock: {fileID: 4723116404803845273, guid: fa09b3d10f4a68e4cb3b3659ce01f81b, type: 3}
   paper: {fileID: 45733425814321460, guid: 89f92359b95af944481bba4cbb19fe82, type: 3}
   scissors: {fileID: 5056378033638813093, guid: 32eb6413b381e8b44af3068fe6347291, type: 3}
-  spawnBuffer: 2
+  spawnBuffer: 1
 --- !u!1 &1430008172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,6 +1599,7 @@ MonoBehaviour:
   status: 1
   normalSpeed: 0.3
   fastForwardSpeed: 0
+  destroyOnHit: 1
 --- !u!1 &1630076850
 GameObject:
   m_ObjectHideFlags: 0

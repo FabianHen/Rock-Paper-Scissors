@@ -13,11 +13,9 @@ public class ControlButtonScript : MonoBehaviour
     private void Update() {
         if (pauseButton.isOn) {
             ManagerScript.Instance.status = GameStatus.Paused;
-        }
-        else if(resumeButton.isOn) {
+        } else if(resumeButton.isOn) {
             ManagerScript.Instance.status = GameStatus.Running;
-        }
-        else {
+        } else {
             ManagerScript.Instance.status = GameStatus.FastForward;
         }
     }

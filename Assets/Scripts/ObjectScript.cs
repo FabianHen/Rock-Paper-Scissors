@@ -22,22 +22,22 @@ public class ObjectScript : MonoBehaviour
         ManagerScript.Instance.Objects.Add(this);
         targetType = SetTargetType(type);
     }
-    void Update()
-    {
-        if (Time.time > cooldown) {
-            CheckCollidingObjects();
-        }
-        if (SearchNearestTargetType() != null && ManagerScript.Instance.status != GameStatus.Paused) {
-            Vector3 nearestTargetType = SearchNearestTargetType().transform.position;
-            Vector3 targetPosition = Vector3.ClampMagnitude(nearestTargetType - transform.position, 0.1f);
-            targetPosition.z = 0;
-            if (ManagerScript.Instance.status == GameStatus.Running) {
-                transform.position += targetPosition * ManagerScript.Instance.normalSpeed;
+    void Update() {
+        if (ManagerScript.Instance.status != GameStatus.Paused) {
+            if (Time.time > cooldown) {
+                CheckCollidingObjects();
             }
-            else {
-                transform.position += targetPosition * ManagerScript.Instance.fastForwardSpeed;
+            if (SearchNearestTargetType() != null) {
+                Vector3 nearestTargetType = SearchNearestTargetType().transform.position;
+                Vector3 targetPosition = Vector3.ClampMagnitude(nearestTargetType - transform.position, 0.1f);
+                targetPosition.z = 0;
+                if (ManagerScript.Instance.status == GameStatus.Running) {
+                    transform.position += targetPosition * ManagerScript.Instance.normalSpeed;
+                } else {
+                    transform.position += targetPosition * ManagerScript.Instance.fastForwardSpeed;
+                }
             }
-        }
+        }  
     }
 
     private void UpdateSprite() {
@@ -83,8 +83,7 @@ public class ObjectScript : MonoBehaviour
             targetType = SetTargetType(type);
             UpdateSprite();
             cooldown = Time.time + 1;
-        }
-        else {
+        } else {
             ManagerScript.Instance.Objects.Remove(this);
             Destroy(gameObject);
         }

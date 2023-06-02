@@ -32,13 +32,8 @@ public class ManagerScript : MonoBehaviour
     public float normalSpeed, fastForwardSpeed;
     public bool destroyOnHit;
     private void Start() {
-        if(SceneManager.GetActiveScene().buildIndex == 0) {
-            objectsPlaceable = false;
-        }
-        else {
-            objectsPlaceable = true;
-        }
-
+        status = GameStatus.Paused;
+        objectsPlaceable = SceneManager.GetActiveScene().buildIndex != 0;
         destroyOnHit = true;
     }
     private void Update() {

@@ -32,5 +32,8 @@ public class ControlToggleScript : MonoBehaviour
             toggle2.GetComponent<Image>().color = colorPassive;
 
         }
+        if(ManagerScript.Instance.status != GameStatus.Paused) {
+            ManagerScript.Instance.SetObjectsPlaceable(false);
+        }
     }
 }
