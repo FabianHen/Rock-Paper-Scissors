@@ -15,14 +15,17 @@ public class ObjectScript : MonoBehaviour
     [SerializeField] private List<ObjectScript> collidingObjects;
     public Sprite rockSprite, paperSprite, scissorsSprite;
     private float cooldown;
+    private AudioSource contactSound;
     void Start()
     {
+        contactSound = GetComponent<AudioSource>();
         cooldown = Time.time + 1;
         collidingObjects = new List<ObjectScript>();
         ManagerScript.Instance.Objects.Add(this);
         targetType = SetTargetType(type);
     }
     void Update() {
+        
         if (ManagerScript.Instance.status != GameStatus.Paused) {
             if (Time.time > cooldown) {
                 CheckCollidingObjects();
@@ -51,6 +54,7 @@ public class ObjectScript : MonoBehaviour
            for(int i = 0; i < collidingObjects.Count; i++) {
                 if (collidingObjects[i].type == targetType) {
                     collidingObjects[i].Hit(type);
+                    contactSound.Play();
                 }
             }
         }

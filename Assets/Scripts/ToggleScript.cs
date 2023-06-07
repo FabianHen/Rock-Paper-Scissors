@@ -5,10 +5,13 @@ public class ToggleScript : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Toggle thisToggle, toggle1, toggle2;
     [SerializeField] Type type;
+    private AudioSource sound;
 
-
+    private void Start() {
+        sound = GetComponent<AudioSource>();
+    }
     public void OnSelect() {
-
+        sound.Play();
         if (thisToggle.isOn) {
             ManagerScript.Instance.SetCurrentType(type);
             thisToggle.interactable = false;

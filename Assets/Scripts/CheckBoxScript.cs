@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class CheckBoxScript : MonoBehaviour
 {
- public void OnToggle() {
+    private AudioSource sound;
+    private void Start() {
+        sound = GetComponent<AudioSource>();
+    }
+    public void OnToggle() {
+        sound.Play();
         if (gameObject.GetComponent<Toggle>().isOn) {
             ManagerScript.Instance.destroyOnHit = true;
         } else {

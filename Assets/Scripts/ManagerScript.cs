@@ -30,25 +30,41 @@ public class ManagerScript : MonoBehaviour
     public GameObject rock, paper, scissors;
     public GameStatus status;
     public float normalSpeed, fastForwardSpeed;
-    public bool destroyOnHit;
-    private void Start() {
+    public bool destroyOnHit, menuActive;
+    private AudioSource placeSound;
+    
+
+    private void Start() {       
+        placeSound = GetComponent<AudioSource>();
         status = GameStatus.Paused;
-        objectsPlaceable = SceneManager.GetActiveScene().buildIndex != 0;
+        menuActive = SceneManager.GetActiveScene().buildIndex == 0;
+
+        if (menuActive) {
+            status = GameStatus.Running;
+        }
+        else {
+            status = GameStatus.Paused;
+        }
+
+        objectsPlaceable = !menuActive;
         destroyOnHit = true;
     }
     private void Update() {
-        if(status != GameStatus.Paused && SceneManager.GetActiveScene().buildIndex != 0 && OneLeft()) {
-            objectsPlaceable = true;
-            status = GameStatus.Paused;
-        }
-        if(status != GameStatus.Paused && objectsPlaceable) {
-            objectsPlaceable = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = 1000.0f;       
-            Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Instantiate(GetCurrentObject(), objectPos, Quaternion.identity); ;
+        if (!menuActive) {
+            if (status != GameStatus.Paused && OneLeft()) {
+                objectsPlaceable = true;
+                status = GameStatus.Paused;
+            }
+            if (status != GameStatus.Paused && objectsPlaceable) {
+                objectsPlaceable = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
+                placeSound.Play();
+                Vector3 mousePos = Input.mousePosition;
+                mousePos.z = 1000.0f;
+                Vector3 objectPos = Camera.main.ScreenToWorldPoint(mousePos);
+                Instantiate(GetCurrentObject(), objectPos, Quaternion.identity); ;
+            }
         }
     }
 

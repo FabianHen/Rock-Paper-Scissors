@@ -8,8 +8,10 @@ public class ControlToggleScript : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Toggle thisToggle, toggle1, toggle2;
     [SerializeField] private GameStatus thisStatus;
     private Color colorActive, colorPassive;
+    private AudioSource sound;
 
     private void Start() {
+        sound = GetComponent<AudioSource>();
         colorActive = Color.white;
         colorActive.a = 1f;
         Color col = Color.white;
@@ -20,12 +22,11 @@ public class ControlToggleScript : MonoBehaviour
     void Update() {
         if (ManagerScript.Instance.status == thisStatus && !thisToggle.isOn){
             thisToggle.isOn = true;
-            OnSelect();
+            Switch();
         }
     }
 
-
-    public void OnSelect() {
+    private void Switch() {
         if (thisToggle.isOn) {
             ManagerScript.Instance.status = thisStatus;
             thisToggle.interactable = false;
@@ -38,7 +39,10 @@ public class ControlToggleScript : MonoBehaviour
             toggle2.isOn = false;
             toggle2.interactable = true;
             toggle2.GetComponent<Image>().color = colorPassive;
-
         }
+    }
+    public void OnSelect() {
+        sound.Play();
+        Switch();
     }
 }
