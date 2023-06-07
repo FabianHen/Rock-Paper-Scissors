@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ControlToggleScript : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Toggle thisToggle, toggle1, toggle2;
+    [SerializeField] private GameStatus thisStatus;
     private Color colorActive, colorPassive;
 
     private void Start() {
@@ -16,10 +17,17 @@ public class ControlToggleScript : MonoBehaviour
         colorPassive = col;
     }
 
+    void Update() {
+        if (ManagerScript.Instance.status == thisStatus && !thisToggle.isOn){
+            thisToggle.isOn = true;
+            OnSelect();
+        }
+    }
+
 
     public void OnSelect() {
-
         if (thisToggle.isOn) {
+            ManagerScript.Instance.status = thisStatus;
             thisToggle.interactable = false;
             thisToggle.GetComponent<Image>().color = colorActive;
 
@@ -31,9 +39,6 @@ public class ControlToggleScript : MonoBehaviour
             toggle2.interactable = true;
             toggle2.GetComponent<Image>().color = colorPassive;
 
-        }
-        if(ManagerScript.Instance.status != GameStatus.Paused) {
-            ManagerScript.Instance.SetObjectsPlaceable(false);
         }
     }
 }

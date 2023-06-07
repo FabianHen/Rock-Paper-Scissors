@@ -614,6 +614,7 @@ MonoBehaviour:
   thisToggle: {fileID: 246430918}
   toggle1: {fileID: 1914643398}
   toggle2: {fileID: 1473989269}
+  thisStatus: 2
 --- !u!1 &316848474
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +805,6 @@ GameObject:
   m_Component:
   - component: {fileID: 612925167}
   - component: {fileID: 612925166}
-  - component: {fileID: 612925168}
   m_Layer: 0
   m_Name: Control Buttons
   m_TagString: Untagged
@@ -862,22 +862,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000040054, y: -50}
   m_SizeDelta: {x: 336.9001, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &612925168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612925165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0e84124edf05041a955ae6c4df5fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cancelButton: {fileID: 914683580}
-  pauseButton: {fileID: 1914643398}
-  resumeButton: {fileID: 1473989269}
-  fastForwardButton: {fileID: 246430918}
 --- !u!1 &696616379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1197,7 @@ GameObject:
   - component: {fileID: 914683581}
   - component: {fileID: 914683580}
   - component: {fileID: 914683584}
+  - component: {fileID: 914683585}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -1263,7 +1248,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 5
@@ -1284,8 +1269,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 612925168}
-        m_TargetAssemblyTypeName: ControlButtonScript, Assembly-CSharp
+      - m_Target: {fileID: 914683585}
+        m_TargetAssemblyTypeName: CancelButtonScript, Assembly-CSharp
         m_MethodName: OnCancelClick
         m_Mode: 1
         m_Arguments:
@@ -1309,7 +1294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.11764706}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1348,6 +1333,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   insideCursor: {fileID: 2800000, guid: 5988a2020badc834c96521b52b6a08f5, type: 3}
   outsideCursor: {fileID: 2800000, guid: 8ee98e5afeb13384cb04affd2fccacf3, type: 3}
+--- !u!114 &914683585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914683578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0e84124edf05041a955ae6c4df5fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &929714574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,6 +2559,7 @@ MonoBehaviour:
   thisToggle: {fileID: 1473989269}
   toggle1: {fileID: 1914643398}
   toggle2: {fileID: 246430918}
+  thisStatus: 1
 --- !u!1 &1521644192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3340,6 +3338,7 @@ MonoBehaviour:
   thisToggle: {fileID: 1914643398}
   toggle1: {fileID: 1473989269}
   toggle2: {fileID: 246430918}
+  thisStatus: 0
 --- !u!1 &1921703047
 GameObject:
   m_ObjectHideFlags: 0

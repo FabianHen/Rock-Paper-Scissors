@@ -37,7 +37,13 @@ public class ManagerScript : MonoBehaviour
         destroyOnHit = true;
     }
     private void Update() {
-
+        if(status != GameStatus.Paused && SceneManager.GetActiveScene().buildIndex != 0 && OneLeft()) {
+            objectsPlaceable = true;
+            status = GameStatus.Paused;
+        }
+        if(status != GameStatus.Paused && objectsPlaceable) {
+            objectsPlaceable = false;
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0) && objectsPlaceable) {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 1000.0f;       
