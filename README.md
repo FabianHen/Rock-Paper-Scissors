@@ -2,7 +2,7 @@
 This is a Unity project for a game based on the classic game "Rock Paper Scissors." In this game, you can place objects representing Rock, Paper, and Scissors on a game area. The basic rules of Rock Paper Scissors determine which object can defeat another, and you have the option to choose between destruction and transformation for the losing object.
 
 ## Project Description
-The project is developed using Unity version 2021.3.16f1. **It is important to note that this game is not a perfect implementation but rather a learning experience in utilizing Unity's features. This project serves as a stepping stone towards future projects where I can further refine my skills and create more complex and impressive games.**
+The project is developed using Unity version 2021.3.16f1. **It is important to note that this game is not a perfect implementation but rather a learning experience in utilizing Unity's features. This project serves as a stepping stone towards future projects where I can further refine my skills and create more complex games.**
 
 ## Installation
  To run this game on your machine, please follow these simple steps:
