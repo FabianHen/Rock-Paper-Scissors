@@ -7,7 +7,7 @@ The project is developed using Unity version 2021.3.16f1. **It is important to n
 ## Installation
  To run this game on your machine, please follow these simple steps:
 
-	1. Download the game files from the released version.
+	1. Download the Rock.Paper.scissors.Zip from the latest released version.
 
 	2. Extract the downloaded files to a desired location on your computer.
 
